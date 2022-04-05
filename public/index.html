@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1"
+    />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <script>
+      // 提前执行，初始化 resize 事件不会执行
+      setRem();
+      // 原始配置
+      function setRem() {
+        let doc = document.documentElement;
+        let width = doc.getBoundingClientRect().width;
+        let rem = 0;
+        if (width > 767) {
+          rem = width / 15;
+        } else {
+          rem = width / 5;
+        }
+        doc.style.fontSize = rem + "px";
+      }
+      // 监听窗口变化
+      addEventListener("resize", setRem);
+    </script>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
+  </body>
+</html>
